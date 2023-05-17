@@ -1,18 +1,15 @@
+const path = require("path");
 const express = require("express");
+const adminController = require("../controllers/admin");
 
 const router = express.Router();
 
 // /admin/add-product
-router.get("/add-product", (req, res, next) => {
-  res.send(
-    "<form action='/admin/add-product' method='post'><input type='text' name='title'><button type='submit'>Add Product</button></input></form>"
-  );
-});
+router.get("/add-product", adminController.getAddProduct);
+
+router.get("/products", adminController.getProducts);
 
 // same as .use but filtering to only POST request
-router.post("/add-product", (req, res, next) => {
-  console.log(req.body);
-  res.redirect("/");
-});
+router.post("/add-product", adminController.postAddProduct);
 
 module.exports = router;

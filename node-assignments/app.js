@@ -1,6 +1,9 @@
 const express = require("express");
+const path = require("path");
 
 const app = express();
+
+app.use(express.static(path.join(__dirname, "public")));
 
 // app.use((req, res, next) => {
 //   next();
@@ -14,12 +17,12 @@ const app = express();
 // have to have more specific middleware first
 app.use("/users", (req, res, next) => {
   console.log("USERS RES");
-  res.send("<h1>USERS</h1>");
+  res.sendFile(path.join(__dirname, "views", "users.html"));
 });
 
 app.use("/", (req, res, next) => {
   console.log("HOMEPAGE RES");
-  res.send("<h1>HOMEPAGE</h1>");
+  res.sendFile(path.join(__dirname, "views", "basic.html"));
 });
 
 app.listen(3000);
